@@ -33,86 +33,68 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#0b0e11] min-h-screen text-white font-sans pb-40">
+    <div style={{ backgroundColor: '#0b0e11', minHeight: '100vh', color: 'white', fontFamily: 'sans-serif', paddingBottom: '160px' }}>
       <Head>
         <title>@nath_elloy | VIP</title>
         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
-      {/* Header fixo */}
-      <div className="fixed top-0 w-full h-14 bg-[#0b0e11]/90 backdrop-blur-md border-b border-gray-800 z-50 flex items-center px-4">
-        <div className="bg-[#ff5a00] w-8 h-8 rounded-lg flex items-center justify-center font-black text-white text-xs">P</div>
-        <span className="ml-3 text-sm font-bold">@nath_elloy</span>
+      {/* Banner & Perfil */}
+      <div style={{ height: '180px', width: '100%', backgroundImage: "url('/banner.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+      <div style={{ padding: '0 20px', marginTop: '-45px' }}>
+        <img src="/avatar.png" style={{ width: '90px', height: '90px', borderRadius: '50%', border: '4px solid #0b0e11', objectFit: 'cover' }} />
+        <h1 style={{ fontSize: '22px', fontWeight: '900', marginTop: '10px' }}>@nath_elloy ✅</h1>
       </div>
 
-      {/* Banner */}
-      <div className="relative h-48 w-full bg-cover bg-center" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
-
-      {/* Perfil */}
-      <div className="px-5 -mt-12 relative z-10">
-        <div className="w-24 h-24 rounded-full border-4 border-[#0b0e11] overflow-hidden bg-gray-800">
-          <img src="/avatar.png" className="w-full h-full object-cover" />
-        </div>
-        <h1 className="text-2xl font-black mt-3">@nath_elloy ✅</h1>
-        <p className="text-gray-400 text-sm mt-1 italic border-l-2 border-[#ff5a00] pl-3 italic opacity-80">
-          "Graças a Deus sou piranha!"<br/>Assine meu conteúdo exclusivo abaixo. 👇
-        </p>
-      </div>
-
-      {/* Seção de Mídias (O "Preview Bloqueado" da sua foto) */}
-      <div className="px-5 mt-10">
-        <div className="relative w-full aspect-video bg-[#161b22] rounded-3xl overflow-hidden border border-gray-800 flex flex-col items-center justify-center mb-6">
-           <div className="text-3xl mb-2">🔒</div>
-           <p className="text-[10px] font-bold uppercase tracking-widest opacity-50">Preview Bloqueado</p>
+      {/* SEÇÃO DAS CAIXAS BLOQUEADAS (O que você pediu) */}
+      <div style={{ padding: '20px' }}>
+        {/* Card Principal de Preview */}
+        <div style={{ width: '100%', aspectRatio: '16/9', backgroundColor: '#161b22', borderRadius: '24px', border: '1px solid #30363d', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ fontSize: '32px', marginBottom: '8px' }}>🔒</div>
+            <p style={{ fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', opacity: 0.5 }}>Preview Bloqueado</p>
         </div>
 
-        <div className="flex justify-between items-center mb-4">
-           <h2 className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Mídias</h2>
-           <span className="bg-[#161b22] text-[10px] px-3 py-1 rounded-full border border-gray-800 text-gray-400">148 itens</span>
+        {/* Título Mídias */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+          <h2 style={{ fontSize: '11px', fontWeight: '900', color: '#8b949e', textTransform: 'uppercase' }}>Mídias</h2>
+          <span style={{ backgroundColor: '#161b22', fontSize: '10px', padding: '4px 10px', borderRadius: '12px', color: '#8b949e', border: '1px solid #30363d' }}>148 itens</span>
         </div>
 
-        <div className="grid grid-cols-3 gap-2">
+        {/* Grade de Fotos Bloqueadas */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
           {[1,2,3,4,5,6].map(i => (
-            <div key={i} className="aspect-square bg-[#161b22] rounded-2xl flex items-center justify-center border border-gray-800 shadow-inner">
-              <span className="text-xl opacity-20">🔒</span>
+            <div key={i} style={{ aspectRatio: '1/1', backgroundColor: '#161b22', borderRadius: '16px', border: '1px solid #30363d', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: '20px', opacity: 0.2 }}>🔒</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Planos */}
-      <div className="px-5 mt-12 space-y-3">
-        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Escolha seu plano</p>
-        {Object.values(plans).map((p) => (
+      <div style={{ padding: '0 20px' }}>
+         {Object.values(plans).map((p) => (
           <div key={p.id} onClick={() => setSelectedPlan(p.id)} 
-               className={`p-5 rounded-[2rem] border-2 transition-all cursor-pointer flex justify-between items-center ${selectedPlan === p.id ? 'border-[#ff5a00] bg-[#ff5a00]/5' : 'border-gray-800 bg-[#0d1117]'}`}>
-            <span className="font-bold text-sm uppercase tracking-tight">{p.title}</span>
-            <span className="text-[#ff5a00] font-black text-lg">R$ {p.price.toFixed(2).replace('.', ',')}</span>
+               style={{ padding: '18px', borderRadius: '20px', border: selectedPlan === p.id ? '2px solid #ff5a00' : '1px solid #30363d', backgroundColor: '#0d1117', display: 'flex', justifyContent: 'space-between', marginBottom: '10px', cursor: 'pointer' }}>
+            <span style={{ fontWeight: 'bold', fontSize: '13px' }}>{p.title}</span>
+            <span style={{ color: '#ff5a00', fontWeight: '900' }}>R$ {p.price.toFixed(2).replace('.', ',')}</span>
           </div>
         ))}
       </div>
 
-      {/* Botão de Pagamento Flutuante */}
-      <div className="fixed bottom-8 left-0 w-full px-5 z-50">
+      {/* Botão de Pagamento */}
+      <div style={{ position: 'fixed', bottom: '30px', left: 0, width: '100%', padding: '0 20px' }}>
         {!pixData ? (
-          <button onClick={handleCheckout} disabled={loading} className="w-full bg-[#ff5a00] h-20 rounded-[2.5rem] font-black text-white uppercase flex items-center justify-center gap-4 shadow-[0_20px_50px_rgba(255,90,0,0.3)] hover:scale-[1.02] transition-transform active:scale-95">
-            <div className="bg-black/20 w-10 h-10 rounded-full flex items-center justify-center text-sm">N</div>
-            {loading ? 'GERANDO PIX...' : 'DESTRAVAR TUDO AGORA - CLIQUE AQUI'}
+          <button onClick={handleCheckout} style={{ width: '100%', backgroundColor: '#ff5a00', height: '70px', borderRadius: '35px', color: 'white', fontWeight: '900', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <div style={{ backgroundColor: 'rgba(0,0,0,0.2)', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>N</div>
+            {loading ? 'PROCESSANDO...' : 'DESTRAVAR TUDO AGORA'}
           </button>
         ) : (
-          <div className="bg-[#161b22] p-8 rounded-[3rem] border border-gray-700 shadow-2xl text-center">
-             <div className="bg-white p-4 rounded-3xl inline-block mb-6 shadow-xl">
-                <img src={`data:image/jpeg;base64,${pixData.qr_code_base64}`} className="w-44 h-44" />
-             </div>
-             <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Código copiado!'); }} 
-                     className="w-full bg-white text-black font-black py-5 rounded-[2rem] text-sm mb-4 uppercase tracking-tighter">
-                COPIAR CÓDIGO PIX
-             </button>
-             <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Acesso imediato após o pagamento</p>
-             <button onClick={() => setPixData(null)} className="mt-4 text-gray-600 text-[10px] underline uppercase">Cancelar</button>
+          <div style={{ backgroundColor: '#161b22', padding: '25px', borderRadius: '30px', border: '1px solid #30363d', textAlign: 'center' }}>
+             <img src={`data:image/jpeg;base64,${pixData.qr_code_base64}`} style={{ width: '160px', backgroundColor: 'white', padding: '10px', borderRadius: '15px', marginBottom: '15px' }} />
+             <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Copiado!'); }} style={{ width: '100%', padding: '15px', borderRadius: '15px', fontWeight: '900' }}>COPIAR PIX</button>
           </div>
         )}
       </div>
     </div>
   );
-}
+} 
