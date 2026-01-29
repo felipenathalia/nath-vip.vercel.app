@@ -1,18 +1,38 @@
-import mercadopago from 'mercadopago';
-
-// Aqui ele vai buscar a senha no lugar seguro
-mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);
-
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Apenas POST' });
+
   const { plan } = req.body;
+  const token = process.env.MP_ACCESS_TOKEN;
+
   try {
-    const payment = await mercadopago.payment.create({
-      transaction_amount: Number(plan.price),
-      description: `@nath_elloy - ${plan.title}`,
-      payment_method_id: 'pix',
-      payer: { email: process.env.MP_EMAIL, first_name: 'Cliente', last_name: 'P' }
+    const response = await fetch('https://api.mercadopago.com/v1/payments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'X-Idempotency-Key': Buffer.from(Date.now().toString()).toString('base64') // Chave única
+      },
+      body: JSON.stringify({
+        transaction_amount: Number(plan.price),
+        description: `Acesso VIP - ${plan.title}`,
+        payment_method_id: 'pix',
+        payer: {
+          email: 'pagamento@nath-vip.com', // E-mail fixo apenas para validar a transação
+          first_name: 'Cliente',
+          last_name: 'Premium'
+        }
+      })
     });
-    res.status(200).json({ qr_code: payment.body.point_of_interaction.transaction_data.qr_code });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Erro detalhado do MP:', data);
+      return res.status(response.status).json({ error: data.message || 'Erro no MP' });
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro interno' });
+  }
 }
