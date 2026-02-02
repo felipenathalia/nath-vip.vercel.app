@@ -89,7 +89,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* GRADE COLORIDA ENIGMÁTICA - DE VOLTA! */}
       <div className="px-5 mt-6 grid grid-cols-3 gap-3">
         {[
           "bg-gradient-to-br from-gray-900 to-purple-900/40",
@@ -111,18 +110,21 @@ export default function Home() {
         </p>
       </div>
 
-      {/* BOTÕES COM ESTRATÉGIA DE ANCORAGEM */}
+      {/* BOTÕES ATUALIZADOS - TODOS VIVOS */}
       <div className="px-5 mt-6 space-y-3">
-        <button onClick={() => handleCheckout(plans.mensal)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center opacity-40 transition-all active:scale-95">
-          <span className="font-black text-[10px] uppercase text-gray-500 italic">Acesso 30 dias</span>
-          <span className="text-gray-500 font-black text-sm italic">R$ 1,00</span>
+        {/* MENSAL - AGORA BRANCO E VISÍVEL */}
+        <button onClick={() => handleCheckout(plans.mensal)} className="w-full p-5 rounded-[2rem] border border-white/10 bg-[#0d1117] flex justify-between items-center transition-all active:scale-95 shadow-lg">
+          <span className="font-black text-xs uppercase text-white italic">Acesso 30 dias</span>
+          <span className="text-white font-black text-lg italic">R$ 1,00</span>
         </button>
 
-        <button onClick={() => handleCheckout(plans.semestral)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center transition-all active:scale-95">
-          <span className="font-black text-xs uppercase italic">6 Meses + WhatsApp</span>
+        {/* SEMESTRAL - BRANCO E VISÍVEL */}
+        <button onClick={() => handleCheckout(plans.semestral)} className="w-full p-5 rounded-[2rem] border border-white/10 bg-[#0d1117] flex justify-between items-center transition-all active:scale-95 shadow-lg">
+          <span className="font-black text-xs uppercase italic text-white">6 Meses + WhatsApp</span>
           <span className="text-white font-black text-lg italic">R$ 24,90</span>
         </button>
 
+        {/* ANUAL - CONTINUA COM O DESTAQUE MÁXIMO */}
         <button onClick={() => handleCheckout(plans.anual)} className="w-full p-6 rounded-[2rem] border-2 border-[#ff5a00] bg-gradient-to-r from-[#0d1117] via-[#1a130f] to-[#0d1117] flex justify-between items-center shadow-[0_0_25px_rgba(255,90,0,0.3)] animate-pulse transition-all active:scale-95">
           <div className="flex flex-col items-start text-left">
             <div className="flex items-center gap-2 mb-1">
@@ -133,7 +135,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-end">
              <span className="text-[#ff5a00] font-black text-2xl italic leading-none">R$ 34,90</span>
-             <span className="text-[9px] text-gray-500 line-through mt-1 italic font-bold text-right uppercase">De R$ 97,00</span>
+             <span className="text-[9px] text-gray-500 line-through mt-1 italic font-bold text-right uppercase text-right">De R$ 97,00</span>
           </div>
         </button>
       </div>
