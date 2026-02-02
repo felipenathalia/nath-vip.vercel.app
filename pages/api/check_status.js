@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     });
     const data = await response.json();
 
-    // NOTIFICAÇÃO CURTA
+    // SÓ ENVIA SE FOR APROVADO
     if (data.status === 'approved') {
       await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
