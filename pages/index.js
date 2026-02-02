@@ -66,7 +66,7 @@ export default function Home() {
         <span className="text-sm font-bold tracking-tight">@nath_elloy</span>
       </div>
 
-      <div className="relative h-44 w-full bg-cover bg-center mt-14" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
+      <div className="relative h-44 w-full bg-cover bg-center mt-14 shadow-inner" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
 
       <div className="px-5 -mt-10 relative z-10 flex items-end gap-4">
         <div className="w-24 h-24 rounded-full border-4 border-[#0b0e11] overflow-hidden bg-gray-900 shadow-2xl">
@@ -90,15 +90,29 @@ export default function Home() {
         </div>
       </div>
 
+      {/* GRADE COLORIDA ENIGMÁTICA VOLTOU */}
       <div className="px-5 mt-6 grid grid-cols-3 gap-3">
-        {[1,2,3,4,5,6].map((i) => (
-          <div key={i} className="aspect-square bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-800 flex items-center justify-center">
+        {[
+          "bg-gradient-to-br from-gray-900 to-purple-900/40",
+          "bg-gradient-to-br from-gray-900 to-blue-900/40",
+          "bg-gradient-to-br from-gray-900 to-red-900/40",
+          "bg-gradient-to-br from-gray-900 to-emerald-900/40",
+          "bg-gradient-to-br from-gray-900 to-pink-900/40",
+          "bg-gradient-to-br from-gray-900 to-indigo-900/40"
+        ].map((bg, i) => (
+          <div key={i} className={`aspect-square ${bg} rounded-2xl border border-gray-800 flex items-center justify-center shadow-inner`}>
              <span className="text-xl opacity-20">🔒</span>
           </div>
         ))}
       </div>
 
-      <div className="px-5 mt-10 space-y-3">
+      <div className="px-6 mt-10 text-center">
+        <p className="text-gray-300 text-sm leading-relaxed italic">
+          Desbloqueie agora meu conteúdo sem censura e tenha acesso ao meu <span className="text-[#ff5a00] font-bold">WhatsApp Pessoal</span>.🥰
+        </p>
+      </div>
+
+      <div className="px-5 mt-6 space-y-3">
         {Object.values(plans).map((p) => (
           <button key={p.id} onClick={() => handleCheckout(p)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center shadow-xl transition-all active:scale-95">
             <span className="font-black text-xs uppercase">{p.title}</span>
@@ -109,24 +123,28 @@ export default function Home() {
 
       {pixData && (
         <div className="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center p-6 backdrop-blur-md">
-          <div className="bg-[#161b22] w-full max-w-sm p-6 rounded-[3rem] border border-gray-700 text-center">
+          <div className="bg-[#161b22] w-full max-w-sm p-6 rounded-[3rem] border border-gray-700 text-center shadow-2xl">
              <div className="bg-white p-4 rounded-3xl inline-block mb-4">
                 <img src={`data:image/jpeg;base64,${pixData.qr_code_base64}`} className="w-40 h-40" alt="QR Code" />
              </div>
+             
              <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Copiado!'); }} 
                      className="w-full bg-white/10 text-white font-black py-4 rounded-2xl text-xs mb-3 uppercase border border-white/10">
                 COPIAR CÓDIGO PIX
              </button>
+
              <button onClick={() => verifyPayment(true)} 
-                     className="w-full bg-[#ff5a00] text-white font-black py-5 rounded-[2rem] text-sm mb-4 uppercase">
+                     className="w-full bg-[#ff5a00] text-white font-black py-5 rounded-[2rem] text-sm mb-4 uppercase shadow-lg shadow-[#ff5a00]/20">
                 VERIFICAR PAGAMENTO 🔔
              </button>
+
              {checkMessage && (
                <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-2xl mb-4 text-[10px] text-red-400 font-bold leading-tight">
                  {checkMessage}
                </div>
              )}
-             <button onClick={() => setPixData(null)} className="text-[10px] text-gray-400 uppercase underline italic">Voltar</button>
+
+             <button onClick={() => setPixData(null)} className="text-[10px] text-gray-500 uppercase underline italic font-bold">Voltar</button>
           </div>
         </div>
       )}
