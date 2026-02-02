@@ -1,42 +1,46 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Apenas POST' });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Método não permitido' });
+  }
 
   const { plan } = req.body;
-  
-  // USANDO O NOME DA SUA VARIÁVEL DO BOT
-  const token = process.env.MERCADO_PAGO_TOKEN; 
 
   try {
+    // Gerando um ID único para a transação para evitar duplicidade
+    const idempotencyKey = `key_${new Date().getTime()}`;
+
     const response = await fetch('https://api.mercadopago.com/v1/payments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        'X-Idempotency-Key': `pix-${Date.now()}`
+        // USANDO O NOME EXATO DA SUA VARIÁVEL NA VERCEL:
+        'Authorization': `Bearer ${process.env.MERCADO_PAGO_TOKEN}`,
+        'X-Idempotency-Key': idempotencyKey
       },
       body: JSON.stringify({
-        transaction_amount: Number(plan.price),
-        description: "Infoproduto rentavel", // Exatamente como no seu Bot
+        transaction_amount: plan.price,
+        description: `Plano ${plan.title} - @nath_elloy`,
         payment_method_id: 'pix',
+        // Define que o PIX expira em 30 minutos
+        date_of_expiration: new Date(new Date().getTime() + 30 * 60000).toISOString(),
         payer: {
-          email: 'natyelloy@proton.me', // Seu e-mail validado
+          email: 'cliente@email.com', // O MP exige um e-mail, mesmo que fictício para PIX
           first_name: 'Cliente',
           last_name: 'VIP'
-        },
-        // Duração de 30 minutos como no seu ENV
-        date_of_expiration: new Date(Date.now() + 30 * 60000).toISOString()
+        }
       })
     });
 
     const data = await response.json();
 
-    if (!response.ok) {
+    if (response.ok) {
+      res.status(200).json(data);
+    } else {
       console.error('Erro MP:', data);
-      return res.status(response.status).json({ error: data.message || 'Erro no MP' });
+      res.status(500).json({ error: 'Erro ao gerar o pagamento', details: data });
     }
-
-    return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({ error: 'Erro interno' });
+    console.error('Erro de conexão:', error);
+    res.status(500).json({ error: 'Erro interno no servidor' });
   }
 }
