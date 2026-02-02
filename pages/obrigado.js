@@ -17,7 +17,7 @@ export default function Obrigado() {
     }
   }, []);
 
-  // Se não estiver autorizado ainda, mostra tela preta (sem nada escrito)
+  // Se não estiver autorizado ainda, mostra tela preta (sem nada escrito) para evitar a piscada branca
   if (!autorizado) {
     return <div style={{ backgroundColor: '#0b0e11', minHeight: '100vh', width: '100%' }} />;
   }
@@ -31,7 +31,7 @@ export default function Obrigado() {
         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
       
-      {/* Ícone de Sucesso */}
+      {/* Ícone de Sucesso - Verde com brilho */}
       <div className="w-20 h-20 bg-[#22c55e] rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)] animate-bounce">
         <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"></path>
@@ -47,6 +47,7 @@ export default function Obrigado() {
         Toque no botão abaixo para entrar agora! 👇
       </p>
       
+      {/* Botão Azul Brilhante do Telegram */}
       <a 
         href="https://t.me/+R7NykZfhGwJhNWQx" 
         target="_blank" 
@@ -56,15 +57,21 @@ export default function Obrigado() {
         ENTRAR NO MEU TELEGRAM VIP
       </a>
 
-      {/* Caixa de Informações */}
-      <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-8 rounded-[2.5rem] text-xs text-gray-400">
-        <h2 className="text-white font-bold mb-3 uppercase text-[10px] tracking-widest">Acesso Monitorado</h2>
+      {/* Caixa de Informações Glassmorphism com Textos Originais */}
+      <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-8 rounded-[2.5rem] text-xs text-gray-400 shadow-2xl">
+        <h2 className="text-white font-bold mb-3 uppercase text-[10px] tracking-widest">Ainda não tem o Telegram?</h2>
         <p className="mb-6 leading-relaxed">
-          Seu acesso foi validado. Caso o botão acima não funcione, verifique se você já tem o Telegram instalado.
+          Basta baixar o app na sua loja de aplicativos (App Store ou Play Store), criar sua conta e clicar no botão azul acima novamente.
         </p>
+
         <div className="h-[1px] bg-white/10 w-full mb-6"></div>
-        <p className="leading-relaxed">
-          Suporte: <span className="text-[#ff5a00] font-bold">@nathpessoal</span>
+
+        <h2 className="text-white font-bold mb-3 uppercase text-[10px] tracking-widest">Precisa de Suporte?</h2>
+        <p className="leading-relaxed mb-4">
+          Me chame na <span className="text-[#ff5a00] font-bold">DM do Instagram</span> ou no Telegram pelo usuário <span className="text-white font-bold">@nathpessoal</span>.
+        </p>
+        <p className="leading-relaxed italic text-[10px]">
+          Você será respondido em até 24 horas! 🥰
         </p>
       </div>
 
