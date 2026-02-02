@@ -17,8 +17,10 @@ export default function Home() {
     try {
       const res = await fetch(`/api/check_status?id=${pixData.payment_id}&t=${new Date().getTime()}`);
       const data = await res.json();
+      
+      // MUDANÇA DE SEGURANÇA AQUI: Agora envia o ID para a página de obrigado
       if (data.status === 'approved' || data.status === 'pago') {
-        window.location.href = '/obrigado'; 
+        window.location.href = `/obrigado?id=${pixData.payment_id}`; 
       } else if (isManual) {
         setCheckMessage('⛔️ 𝗦𝗲𝘂 𝗽𝗮𝗴𝗮𝗺𝗲𝗻𝘁𝗼 𝗮𝗶𝗻𝗱𝗮 𝗻𝗮̃𝗼 𝗳𝗼𝗶 𝗰𝗿𝗲𝗱𝗶𝘁𝗮𝗱𝗼 𝗲𝗺 𝗻𝗼𝘀𝘀𝗼 𝘀𝗶𝘀𝘁𝗲𝗺𝗮. O Pagamento para ser aprovado, demora em torno de 𝟯-𝟱 𝗠𝗶𝗻𝘂𝘁𝗼𝘀 𝗮𝗽𝗼́𝘀 𝗮 𝗰𝗼𝗺𝗽𝗿𝗮 𝗳𝗲𝗶𝘁𝗮. Logo após você clica em “ 𝗩𝗘𝗥𝗜𝗙𝗜𝗖𝗔𝗥 𝗣𝗔𝗚𝗔𝗠𝗘𝗡𝗧𝗢 🔔 “ Novamente.');
         setTimeout(() => setCheckMessage(''), 8000);
@@ -90,7 +92,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* GRADE COLORIDA ENIGMÁTICA VOLTOU */}
       <div className="px-5 mt-6 grid grid-cols-3 gap-3">
         {[
           "bg-gradient-to-br from-gray-900 to-purple-900/40",
