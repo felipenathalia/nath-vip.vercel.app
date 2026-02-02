@@ -7,7 +7,7 @@ export default function Home() {
   const [checkMessage, setCheckMessage] = useState('');
 
   const plans = {
-    mensal: { id: 'mensal', title: '1 Mês', price: 1.00 },
+    mensal: { id: 'mensal', title: '1 Mês', price: 19.90 },
     semestral: { id: 'semestral', title: '6 Meses', price: 24.90 },
     anual: { id: 'anual', title: '1 Ano + WhatsApp', price: 34.90 }
   };
@@ -77,54 +77,23 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="px-5 mt-8">
-        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800 shadow-2xl">
-           <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover blur-sm opacity-50">
-              <source src="/video_preview.mp4" type="video/mp4" />
-           </video>
-           <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
-              <span className="text-2xl mb-2">🔒</span>
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/70">Acesso Restrito</p>
-           </div>
-        </div>
-      </div>
-
-      <div className="px-5 mt-6 grid grid-cols-3 gap-3">
-        {[
-          "bg-gradient-to-br from-gray-900 to-purple-900/40",
-          "bg-gradient-to-br from-gray-900 to-blue-900/40",
-          "bg-gradient-to-br from-gray-900 to-red-900/40",
-          "bg-gradient-to-br from-gray-900 to-emerald-900/40",
-          "bg-gradient-to-br from-gray-900 to-pink-900/40",
-          "bg-gradient-to-br from-gray-900 to-indigo-900/40"
-        ].map((bg, i) => (
-          <div key={i} className={`aspect-square ${bg} rounded-2xl border border-gray-800 flex items-center justify-center shadow-inner`}>
-             <span className="text-xl opacity-20">🔒</span>
-          </div>
-        ))}
-      </div>
-
       <div className="px-6 mt-10 text-center">
         <p className="text-gray-300 text-sm leading-relaxed italic">
           Desbloqueie agora meu conteúdo sem censura e tenha acesso ao meu <span className="text-[#ff5a00] font-bold">#WhatsApp Pessoal</span>.🥰
         </p>
       </div>
 
-      {/* BOTÕES ATUALIZADOS - TODOS VIVOS */}
       <div className="px-5 mt-6 space-y-3">
-        {/* MENSAL - AGORA BRANCO E VISÍVEL */}
         <button onClick={() => handleCheckout(plans.mensal)} className="w-full p-5 rounded-[2rem] border border-white/10 bg-[#0d1117] flex justify-between items-center transition-all active:scale-95 shadow-lg">
           <span className="font-black text-xs uppercase text-white italic">Acesso 30 dias</span>
           <span className="text-white font-black text-lg italic">R$ 19,90</span>
         </button>
 
-        {/* SEMESTRAL - BRANCO E VISÍVEL */}
         <button onClick={() => handleCheckout(plans.semestral)} className="w-full p-5 rounded-[2rem] border border-white/10 bg-[#0d1117] flex justify-between items-center transition-all active:scale-95 shadow-lg">
           <span className="font-black text-xs uppercase italic text-white">6 Meses + WhatsApp</span>
           <span className="text-white font-black text-lg italic">R$ 24,90</span>
         </button>
 
-        {/* ANUAL - CONTINUA COM O DESTAQUE MÁXIMO */}
         <button onClick={() => handleCheckout(plans.anual)} className="w-full p-6 rounded-[2rem] border-2 border-[#ff5a00] bg-gradient-to-r from-[#0d1117] via-[#1a130f] to-[#0d1117] flex justify-between items-center shadow-[0_0_25px_rgba(255,90,0,0.3)] animate-pulse transition-all active:scale-95">
           <div className="flex flex-col items-start text-left">
             <div className="flex items-center gap-2 mb-1">
@@ -135,7 +104,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-end">
              <span className="text-[#ff5a00] font-black text-2xl italic leading-none">R$ 34,90</span>
-             <span className="text-[9px] text-gray-500 line-through mt-1 italic font-bold text-right uppercase text-right">De R$ 97,00</span>
+             <span className="text-[9px] text-gray-500 line-through mt-1 italic font-bold text-right uppercase">De R$ 97,00</span>
           </div>
         </button>
       </div>
