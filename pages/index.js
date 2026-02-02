@@ -6,7 +6,7 @@ export default function Home() {
   const [pixData, setPixData] = useState(null);
 
   const plans = {
-    mensal: { id: 'mensal', title: '1 Mês', price: 1.00 }, // Preço de teste
+    mensal: { id: 'mensal', title: '1 Mês', price: 19.90 },
     semestral: { id: 'semestral', title: '6 Meses', price: 24.90 },
     anual: { id: 'anual', title: '1 Ano + WhatsApp', price: 34.90 }
   };
@@ -44,86 +44,93 @@ export default function Home() {
           payment_id: data.id 
         });
       }
-    } catch (e) { alert('Erro no Pix'); }
+    } catch (e) { alert('Erro ao gerar Pix'); }
     finally { setLoading(false); }
   };
 
   return (
-    <div className="bg-[#0b0e11] min-h-screen text-white font-sans pb-20 overflow-x-hidden">
+    <div className="bg-[#0b0e11] min-h-screen text-white font-sans pb-20">
       <Head>
-        <title>@nath_elloy | VIP Oficial v2</title>
+        <title>@nath_elloy | VIP Oficial</title>
         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
-      {/* HEADER COM ÍCONE P */}
-      <div className="fixed top-0 w-full h-14 bg-[#0b0e11]/95 backdrop-blur-md border-b border-gray-800 z-[100] flex items-center px-4">
-        <div className="bg-[#ff5a00] w-8 h-8 rounded-lg flex items-center justify-center font-black text-white mr-3">P</div>
-        <span className="text-sm font-bold tracking-tight">@nath_elloy</span>
+      {/* Header Fixo */}
+      <div className="fixed top-0 w-full h-14 bg-[#0b0e11]/90 backdrop-blur-md border-b border-gray-800 z-50 flex items-center px-4">
+        <img src="/logo.png" className="w-8 h-8 object-contain rounded-lg" alt="P" />
+        <span className="ml-3 text-sm font-bold tracking-tight">@nath_elloy</span>
       </div>
 
-      {/* BANNER E PERFIL */}
-      <div className="relative h-44 w-full bg-cover bg-center mt-14" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
-      <div className="px-5 -mt-10 relative z-10 flex items-end gap-4">
+      {/* Banner */}
+      <div className="relative h-48 w-full bg-cover bg-center" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
+
+      {/* Perfil */}
+      <div className="px-5 -mt-12 relative z-10">
         <div className="w-24 h-24 rounded-full border-4 border-[#0b0e11] overflow-hidden bg-gray-800 shadow-2xl">
           <img src="/avatar.png" className="w-full h-full object-cover" />
         </div>
-        <div className="pb-2">
-           <h1 className="text-2xl font-black flex items-center gap-2 uppercase italic">@nath_elloy ✅</h1>
-           <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">482 Mídias • 15.2k Curtidas</p>
-        </div>
+        <h1 className="text-2xl font-black mt-3 flex items-center gap-2">@nath_elloy ✅</h1>
       </div>
 
-      {/* VÍDEO PRINCIPAL COM CADEADO CENTRAL */}
-      <div className="px-5 mt-8">
-        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800 shadow-2xl">
-           <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover blur-sm">
+      {/* Vídeo Preview */}
+      <div className="px-5 mt-10">
+        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800">
+           <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
               <source src="/video_preview.mp4" type="video/mp4" />
            </video>
-           <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
-              <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 mb-2">
-                 <span className="text-2xl">🔒</span>
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/70">Conteúdo Privado</p>
-           </div>
         </div>
       </div>
 
-      {/* GRADE DE 6 PRÉVIAS COM CADEADO */}
-      <div className="px-5 mt-6 grid grid-cols-3 gap-3">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="aspect-square bg-[#161b22] rounded-2xl relative overflow-hidden border border-gray-800">
-             <img src="/avatar.png" className="w-full h-full object-cover blur-md opacity-30" />
-             <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xl opacity-40">🔒</span>
-             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* TEXTO E BOTÕES */}
-      <div className="px-6 mt-10 text-center">
-        <p className="text-gray-300 text-sm leading-relaxed italic">
-          Escolha abaixo o seu plano para desbloquear meu conteúdo exclusivo e ter meu <span className="text-[#ff5a00] font-bold">WhatsApp Pessoal</span>.🥰
-        </p>
-        <p className="text-[#ff5a00] text-[9px] font-black uppercase tracking-[0.2em] mt-6 animate-pulse">
-           👇 CLIQUE NO PLANO PARA PAGAR VIA PIX 👇
+      {/* TEXTO DE VENDAS */}
+      <div className="px-6 mt-12 text-center">
+        <p className="text-gray-200 text-[15px] leading-relaxed font-medium italic">
+          Abaixo você pode escolher o tempo que irá me espiar e poder ter meu WhatsApp pessoal para gente conversar e o melhor.. <br/>
+          <span className="text-[#ff5a00] font-extrabold not-italic text-lg">COM CHAMADAS DE VIDEO SURPRESA LA DENTRO DO MEU VIP..🥰</span>
         </p>
       </div>
 
-      <div className="px-5 mt-6 space-y-3">
+      {/* INSTRUÇÃO */}
+      <div className="mt-8 text-center px-10">
+        <p className="text-[#ff5a00] text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">
+           👇 ESCOLHA O PLANO E CLIQUE EM CIMA PARA GERAR SEU PAGAMENTO 👇
+        </p>
+      </div>
+
+      {/* BOTÕES DE PLANOS (NÃO HÁ NADA ABAIXO DISSO NO CÓDIGO) */}
+      <div className="px-5 mt-6 space-y-4">
         {Object.values(plans).map((p) => (
           <button 
             key={p.id} 
             onClick={() => handleCheckout(p)}
-            className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] active:scale-95 transition-all flex justify-between items-center shadow-xl"
+            className="w-full p-6 rounded-[2.5rem] border-2 border-[#ff5a00]/20 bg-[#0d1117] active:scale-95 transition-all flex justify-between items-center shadow-lg hover:border-[#ff5a00]"
           >
-            <span className="font-black text-xs uppercase tracking-tighter">{p.title}</span>
-            <span className="text-[#ff5a00] font-black text-lg italic text-right">R$ {p.price.toFixed(2).replace('.', ',')}</span>
+            <div className="text-left font-black text-sm uppercase">{p.title}</div>
+            <span className="text-[#ff5a00] font-black text-lg">R$ {p.price.toFixed(2).replace('.', ',')}</span>
           </button>
         ))}
       </div>
 
       {/* MODAL PIX */}
       {pixData && (
-        <div className="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center p-6 backdrop-blur-md">
-          <div
+        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-6 backdrop-blur-md">
+          <div className="bg-[#161b22] w-full max-w-sm p-8 rounded-[3.5rem] border border-gray-700 text-center">
+             <div className="bg-white p-4 rounded-3xl inline-block mb-6 mx-auto">
+                <img src={`data:image/jpeg;base64,${pixData.qr_code_base64}`} className="w-48 h-48" />
+             </div>
+             <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Copiado!'); }} 
+                     className="w-full bg-[#ff5a00] text-white font-black py-6 rounded-[2.5rem] text-sm mb-4">
+                COPIAR CÓDIGO PIX
+             </button>
+             <button onClick={() => setPixData(null)} className="text-[10px] text-gray-500 uppercase underline">Voltar</button>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div className="fixed inset-0 bg-black/80 z-[110] flex flex-col items-center justify-center">
+          <div className="w-10 h-10 border-4 border-[#ff5a00] border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+    </div>
+  );
+}
