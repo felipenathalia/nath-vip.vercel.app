@@ -18,11 +18,11 @@ export default function Home() {
       const res = await fetch(`/api/check_status?id=${pixData.payment_id}&t=${new Date().getTime()}`);
       const data = await res.json();
       
-      // Se aprovado, envia o ID para a trava da página de obrigado
       if (data.status === 'approved' || data.status === 'pago') {
+        // REDIRECIONAMENTO SEGURO COM ID
         window.location.href = `/obrigado?id=${pixData.payment_id}`; 
       } else if (isManual) {
-        setCheckMessage('⛔️ 𝗦𝗲𝘂 𝗽𝗮𝗴𝗮𝗺𝗲𝗻𝘁𝗼 𝗮𝗶𝗻𝗱𝗮 𝗻𝗮̃𝗼 𝗳𝗼𝗶 𝗰𝗿𝗲𝗱𝗶𝘁𝗮𝗱𝗼 𝗲𝗺 𝗻𝗼𝘀𝘀𝗼 𝘀𝗶𝘀𝘁𝗲𝗺𝗮. O Pagamento para ser aprovado, demora em torno de 𝟯-𝟱 𝗠𝗶𝗻𝘂𝘁𝗼𝘀 𝗮𝗽𝗼́𝘀 𝗮 𝗰𝗼𝗺𝗽𝗿𝗮 𝗳𝗲𝗶𝘁𝗮. Logo após você clica em “ 𝗩𝗘𝗥𝗜𝗙𝗜𝗖𝗔𝗥 𝗣𝗔𝗚𝗔𝗠𝗘𝗡𝗧𝗢 🔔 “ Novamente.');
+        setCheckMessage('⛔️ 𝗦𝗲𝘂 𝗽𝗮𝗴𝗮𝗺𝗲𝗻𝘁𝗼 𝗮𝗶𝗻𝗱𝗮 𝗻𝗮̃𝗼 𝗳𝗼𝗶 𝗰𝗿𝗲𝗱𝗶𝘁𝗮𝗱𝗼...');
         setTimeout(() => setCheckMessage(''), 8000);
       }
     } catch (e) { console.error("Erro na verificação"); }
@@ -38,7 +38,6 @@ export default function Home() {
 
   const handleCheckout = async (plan) => {
     setLoading(true);
-    setCheckMessage('');
     try {
       const res = await fetch('/api/create_pix', {
         method: 'POST',
@@ -76,12 +75,11 @@ export default function Home() {
         </div>
         <div className="pb-1">
            <h1 className="text-2xl font-black italic uppercase">@nath_elloy ✅</h1>
-           <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">482 Mídias • 15.2k Curtidas</p>
         </div>
       </div>
 
       <div className="px-5 mt-8">
-        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800 shadow-2xl">
+        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800">
            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover blur-sm opacity-50">
               <source src="/video_preview.mp4" type="video/mp4" />
            </video>
@@ -92,56 +90,29 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="px-5 mt-6 grid grid-cols-3 gap-3">
-        {[
-          "bg-gradient-to-br from-gray-900 to-purple-900/40",
-          "bg-gradient-to-br from-gray-900 to-blue-900/40",
-          "bg-gradient-to-br from-gray-900 to-red-900/40",
-          "bg-gradient-to-br from-gray-900 to-emerald-900/40",
-          "bg-gradient-to-br from-gray-900 to-pink-900/40",
-          "bg-gradient-to-br from-gray-900 to-indigo-900/40"
-        ].map((bg, i) => (
-          <div key={i} className={`aspect-square ${bg} rounded-2xl border border-gray-800 flex items-center justify-center shadow-inner`}>
-             <span className="text-xl opacity-20">🔒</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="px-6 mt-10 text-center">
-        <p className="text-gray-300 text-sm leading-relaxed italic">
-          Desbloqueie agora meu conteúdo sem censura e tenha acesso ao meu <span className="text-[#ff5a00] font-bold">WhatsApp Pessoal</span>.🥰
-        </p>
-      </div>
-
-      {/* BOTÕES COM ESTRATÉGIA DE MARKETING */}
-      <div className="px-5 mt-6 space-y-4">
+      {/* BOTÕES COM ANCORAGEM NO ANUAL */}
+      <div className="px-5 mt-6 space-y-3">
         {/* MENSAL */}
-        <button onClick={() => handleCheckout(plans.mensal)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center shadow-xl transition-all active:scale-95">
-          <div className="flex flex-col items-start text-left">
-            <span className="font-black text-xs uppercase text-gray-400 italic">Plano Mensal</span>
-            <span className="font-black text-[9px] text-gray-600 uppercase">Acesso Básico</span>
-          </div>
-          <span className="text-[#ff5a00] font-black text-lg italic">R$ 1,00</span>
+        <button onClick={() => handleCheckout(plans.mensal)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center opacity-60">
+          <span className="font-black text-[10px] uppercase text-gray-500 italic">1 Mês Básico</span>
+          <span className="text-gray-500 font-black text-sm italic">R$ 1,00</span>
         </button>
 
-        {/* SEMESTRAL COM WHATSAPP */}
-        <button onClick={() => handleCheckout(plans.semestral)} className="w-full p-5 rounded-[2rem] border border-[#ff5a00]/30 bg-[#0d1117] flex justify-between items-center shadow-xl transition-all active:scale-95 relative overflow-hidden">
-          <div className="flex flex-col items-start text-left">
-            <span className="font-black text-xs uppercase italic">6 Meses + <span className="text-green-500">WhatsApp</span></span>
-            <span className="font-black text-[9px] text-[#ff5a00] uppercase tracking-tighter italic">O Mais Vendido 🔥</span>
-          </div>
-          <span className="text-[#ff5a00] font-black text-lg italic">R$ 24,90</span>
+        {/* SEMESTRAL */}
+        <button onClick={() => handleCheckout(plans.semestral)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center">
+          <span className="font-black text-xs uppercase italic text-white">6 Meses + WhatsApp</span>
+          <span className="text-white font-black text-lg italic">R$ 24,90</span>
         </button>
 
-        {/* ANUAL + WHATS + BONUS */}
-        <button onClick={() => handleCheckout(plans.anual)} className="w-full p-6 rounded-[2rem] border-2 border-[#ff5a00] bg-gradient-to-r from-[#0d1117] to-[#1a130f] flex justify-between items-center shadow-[0_0_20px_rgba(255,90,0,0.2)] transition-all active:scale-95">
+        {/* ANUAL (A ESTRELA) */}
+        <button onClick={() => handleCheckout(plans.anual)} className="w-full p-6 rounded-[2rem] border-2 border-[#ff5a00] bg-gradient-to-r from-[#0d1117] via-[#1a130f] to-[#0d1117] flex justify-between items-center shadow-[0_0_25px_rgba(255,90,0,0.3)] animate-pulse">
           <div className="flex flex-col items-start text-left">
-            <span className="font-black text-sm uppercase italic">1 Ano + <span className="text-green-500">WhatsApp</span></span>
-            <span className="font-black text-[10px] text-emerald-400 uppercase italic">Bônus Exclusivo 💎</span>
+            <span className="bg-[#ff5a00] text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase mb-1">Melhor Escolha</span>
+            <span className="font-black text-sm uppercase italic">1 Ano + WhatsApp + Bônus 💎</span>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-[#ff5a00] font-black text-xl italic text-right">R$ 34,90</span>
-            <span className="text-[9px] text-gray-500 line-through">R$ 97,00</span>
+             <span className="text-[#ff5a00] font-black text-2xl italic leading-none">R$ 34,90</span>
+             <span className="text-[9px] text-gray-500 line-through mt-1">DE R$ 97,00</span>
           </div>
         </button>
       </div>
@@ -152,31 +123,11 @@ export default function Home() {
              <div className="bg-white p-4 rounded-3xl inline-block mb-4">
                 <img src={`data:image/jpeg;base64,${pixData.qr_code_base64}`} className="w-40 h-40" alt="QR Code" />
              </div>
-             
-             <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Copiado!'); }} 
-                     className="w-full bg-white/10 text-white font-black py-4 rounded-2xl text-xs mb-3 uppercase border border-white/10">
-                COPIAR CÓDIGO PIX
-             </button>
-
-             <button onClick={() => verifyPayment(true)} 
-                     className="w-full bg-[#ff5a00] text-white font-black py-5 rounded-[2rem] text-sm mb-4 uppercase shadow-lg shadow-[#ff5a00]/20">
-                VERIFICAR PAGAMENTO 🔔
-             </button>
-
-             {checkMessage && (
-               <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-2xl mb-4 text-[10px] text-red-400 font-bold leading-tight">
-                 {checkMessage}
-               </div>
-             )}
-
+             <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Copiado!'); }} className="w-full bg-white/10 text-white font-black py-4 rounded-2xl text-xs mb-3 uppercase border border-white/10">COPIAR CÓDIGO PIX</button>
+             <button onClick={() => verifyPayment(true)} className="w-full bg-[#ff5a00] text-white font-black py-5 rounded-[2rem] text-sm mb-4 uppercase shadow-lg shadow-[#ff5a00]/20">VERIFICAR PAGAMENTO 🔔</button>
+             {checkMessage && <div className="text-[10px] text-red-400 font-bold mb-4">{checkMessage}</div>}
              <button onClick={() => setPixData(null)} className="text-[10px] text-gray-500 uppercase underline italic font-bold">Voltar</button>
           </div>
-        </div>
-      )}
-
-      {loading && (
-        <div className="fixed inset-0 bg-black/80 z-[210] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-[#ff5a00] border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
     </div>
