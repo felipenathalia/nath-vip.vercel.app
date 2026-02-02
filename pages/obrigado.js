@@ -80,7 +80,7 @@ export default function Obrigado() {
         </div>
       </div>
 
-      <p style={{ marginTop: '25px', fontSize: '9px', color: '#4b5563', fontWeight: 'bold' }}>Suporte: @nathpessoal</p>
+      <p style={{ marginTop: '25px', fontSize: '9px', color: '#4b5563', fontWeight: 'bold' }}>Suporte no TELEGRAM: @nathpessoal</p>
     </div>
   );
 }
