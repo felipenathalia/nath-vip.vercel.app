@@ -115,7 +115,7 @@ export default function Home() {
         {/* MENSAL - AGORA BRANCO E VISÍVEL */}
         <button onClick={() => handleCheckout(plans.mensal)} className="w-full p-5 rounded-[2rem] border border-white/10 bg-[#0d1117] flex justify-between items-center transition-all active:scale-95 shadow-lg">
           <span className="font-black text-xs uppercase text-white italic">Acesso 30 dias</span>
-          <span className="text-white font-black text-lg italic">R$ 1,00</span>
+          <span className="text-white font-black text-lg italic">R$ 19,90</span>
         </button>
 
         {/* SEMESTRAL - BRANCO E VISÍVEL */}
