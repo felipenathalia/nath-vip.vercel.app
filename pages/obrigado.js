@@ -1,51 +1,19 @@
-import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 export default function Obrigado() {
-  const [status, setStatus] = useState('verificando'); // verificando, autorizado, negado
-
-  useEffect(() => {
-    // Trava de segurança: verifica se veio do seu site
-    const veioDoSite = document.referrer.includes('nath-vip-vercel-app.vercel.app');
-    
-    if (veioDoSite) {
-      setStatus('autorizado');
-    } else {
-      setStatus('negado');
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1500);
-    }
-  }, []);
-
-  // Enquanto verifica ou se for negado, mostra apenas o fundo escuro (sem texto quebrado)
-  if (status !== 'autorizado') {
-    return (
-      <div className="bg-[#0b0e11] min-h-screen flex items-center justify-center">
-        <Head>
-           <script src="https://cdn.tailwindcss.com"></script>
-        </Head>
-        <div className="w-10 h-10 border-4 border-[#ff5a00] border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-[#0b0e11] min-h-screen text-white font-sans flex flex-col items-center justify-center px-6 py-12 text-center opacity-0 animate-[fadeIn_0.5s_ease-in_forward] style={{animationFillMode: 'forwards'}}">
+    <div className="bg-[#0b0e11] min-h-screen text-white font-sans flex flex-col items-center justify-center px-6 py-12 text-center">
       <Head>
         <title>Acesso Liberado! 🔥</title>
+        {/* Carrega o CSS antes de renderizar o resto */}
         <script src="https://cdn.tailwindcss.com"></script>
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-        `}</style>
       </Head>
       
-      {/* Ícone de Sucesso */}
-      <div className="w-20 h-20 bg-[#22c55e] rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(34,197,94,0.5)]">
-        <div className="w-10 h-10 border-b-4 border-r-4 border-white rotate-45 mb-2 mr-1"></div>
+      {/* Ícone de Sucesso - Verde do print */}
+      <div className="w-20 h-20 bg-[#22c55e] rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)]">
+        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"></path>
+        </svg>
       </div>
       
       <h1 className="text-3xl font-black mb-2 uppercase italic text-[#ff5a00] tracking-tighter">
@@ -57,6 +25,7 @@ export default function Obrigado() {
         Toque no botão abaixo para entrar agora! 👇
       </p>
       
+      {/* Botão Azul do Telegram com brilho */}
       <a 
         href="https://t.me/+R7NykZfhGwJhNWQx" 
         target="_blank" 
@@ -66,13 +35,14 @@ export default function Obrigado() {
         ENTRAR NO MEU TELEGRAM VIP
       </a>
 
-      <div className="w-full max-w-md bg-[#161b22] border border-white/5 p-8 rounded-[2.5rem] text-xs text-gray-400 shadow-2xl">
+      {/* Caixa de Suporte Glassmorphism */}
+      <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-8 rounded-[2.5rem] text-xs text-gray-400 shadow-2xl">
         <h2 className="text-white font-bold mb-3 uppercase text-[10px] tracking-widest">Ainda não tem o Telegram?</h2>
         <p className="mb-6 leading-relaxed">
-          Baixe o app, crie sua conta e clique no botão azul acima novamente.
+          Basta baixar o app na sua loja, criar sua conta e clicar no botão azul acima novamente.
         </p>
 
-        <div className="h-[1px] bg-white/5 w-full mb-6"></div>
+        <div className="h-[1px] bg-white/10 w-full mb-6"></div>
 
         <h2 className="text-white font-bold mb-3 uppercase text-[10px] tracking-widest">Precisa de Suporte?</h2>
         <p className="leading-relaxed">
@@ -80,7 +50,7 @@ export default function Obrigado() {
         </p>
       </div>
 
-      <p className="mt-12 text-[9px] text-gray-600 uppercase tracking-[0.2em] font-bold">
+      <p className="mt-12 text-[9px] text-gray-600 uppercase tracking-[0.4em] font-bold">
         @NATH_ELLOY • TODOS OS DIREITOS RESERVADOS
       </p>
     </div>
