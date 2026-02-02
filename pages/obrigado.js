@@ -30,61 +30,57 @@ export default function Obrigado() {
       </Head>
       
       <div style={{ 
-        width: '70px', height: '70px', backgroundColor: '#22c55e', borderRadius: '50%', 
-        display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px',
-        boxShadow: '0 0 30px rgba(34,197,94,0.4)'
+        width: '60px', height: '60px', backgroundColor: '#22c55e', borderRadius: '50%', 
+        display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px',
+        boxShadow: '0 0 20px rgba(34,197,94,0.3)'
       }}>
-        <span style={{ fontSize: '35px' }}>✓</span>
+        <span style={{ fontSize: '30px' }}>✓</span>
       </div>
       
-      <h1 style={{ fontSize: '26px', fontWeight: '900', color: '#ff5a00', textTransform: 'uppercase', fontStyle: 'italic', margin: '0' }}>
+      <h1 style={{ fontSize: '24px', fontWeight: '900', color: '#ff5a00', textTransform: 'uppercase', fontStyle: 'italic', margin: '0' }}>
         Pagamento Confirmado!
       </h1>
-      <p style={{ color: '#9ca3af', fontSize: '13px', marginBottom: '25px', marginTop: '5px' }}>Toque no botão abaixo para entrar agora 👇</p>
+
+      {/* AVISO DE CONFIGURAÇÃO - AGORA MAIS VISÍVEL E ANTES DO BOTÃO */}
+      <div style={{ 
+        width: '100%', maxWidth: '400px', backgroundColor: 'rgba(255,90,0,0.1)', 
+        border: '1px solid #ff5a00', padding: '15px', borderRadius: '20px', margin: '20px 0', textAlign: 'left' 
+      }}>
+        <p style={{ fontSize: '11px', fontWeight: 'bold', color: '#ff5a00', marginBottom: '10px', textTransform: 'uppercase', textAlign: 'center' }}>
+          ⚠️ LEIA ANTES DE ENTRAR (IMPORTANTE)
+        </p>
+        <p style={{ fontSize: '10px', color: '#fff', lineHeight: '1.4', margin: '0' }}>
+          Se ao entrar o grupo estiver <b>vazio ou bloqueado</b> (comum em Android e iPhone), você precisa liberar o acesso:
+          <br/><br/>
+          1. Acesse <b>web.telegram.org</b> no navegador do seu celular.<br/>
+          2. Vá em <b>Configurações</b> {'>'} <b>Privacidade e Segurança</b>.<br/>
+          3. Ative a opção: <b>"Filtragem de Conteúdo Sensível"</b>.<br/>
+          <span style={{ color: '#ff5a00' }}><b>4. Reinicie o App e o conteúdo aparecerá na hora!</b></span>
+        </p>
+      </div>
       
       <a href="https://t.me/+R7NykZfhGwJhNWQx" target="_blank" rel="noopener noreferrer" style={{ 
         width: '100%', maxWidth: '350px', backgroundColor: '#24A1DE', color: 'white', 
         padding: '22px', borderRadius: '40px', fontWeight: '900', fontSize: '18px', 
-        textDecoration: 'none', display: 'block', marginBottom: '30px',
+        textDecoration: 'none', display: 'block', marginBottom: '20px',
         boxShadow: '0 10px 30px rgba(36,161,222,0.4)', textTransform: 'uppercase'
       }}>
-        ENTRAR NO MEU VIP
+        ENTRAR NO MEU VIP AGORA
       </a>
 
-      {/* BLOCO: INSTALAÇÃO */}
+      {/* INSTALAÇÃO DO APP */}
       <div style={{ 
         width: '100%', maxWidth: '400px', backgroundColor: 'rgba(255,255,255,0.03)', 
-        border: '1px solid rgba(255,255,255,0.1)', padding: '20px', borderRadius: '25px', marginBottom: '15px' 
+        border: '1px solid rgba(255,255,255,0.1)', padding: '15px', borderRadius: '20px' 
       }}>
-        <h3 style={{ fontSize: '11px', fontWeight: '900', textTransform: 'uppercase', marginBottom: '10px' }}>
-          Ainda não tem o Telegram?
-        </h3>
+        <p style={{ fontSize: '10px', color: '#9ca3af', marginBottom: '10px' }}>Não tem o Telegram instalado?</p>
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
           <a href="https://apps.apple.com/app/telegram-messenger/id682247445" target="_blank" style={{ fontSize: '9px', color: '#fff', border: '1px solid #444', padding: '8px 12px', borderRadius: '10px', textDecoration: 'none' }}>iPhone</a>
           <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger" target="_blank" style={{ fontSize: '9px', color: '#fff', border: '1px solid #444', padding: '8px 12px', borderRadius: '10px', textDecoration: 'none' }}>Android</a>
         </div>
       </div>
 
-      {/* BLOCO: PRIVACIDADE (CORRIGIDO O ERRO DO ">") */}
-      <div style={{ 
-        width: '100%', maxWidth: '400px', backgroundColor: 'rgba(255,90,0,0.05)', 
-        border: '1px solid rgba(255,90,0,0.2)', padding: '25px', borderRadius: '25px', textAlign: 'left' 
-      }}>
-        <h3 style={{ fontSize: '11px', fontWeight: '900', textTransform: 'uppercase', marginBottom: '15px', color: '#ff5a00' }}>
-          ⚠️ ATENÇÃO (Instruções de Acesso)
-        </h3>
-        <p style={{ fontSize: '10px', color: '#d1d5db', marginBottom: '15px', lineHeight: '1.5' }}>
-          Se o grupo aparecer como <b>"Conteúdo Sensível"</b> no iPhone, faça isso:
-        </p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '9px' }}>
-          <p style={{ margin: 0 }}>1. Acesse <b>web.telegram.org</b> no navegador.</p>
-          <p style={{ margin: 0 }}>2. Vá em <b>Settings</b> {'>'} <b>Privacy and Security</b>.</p>
-          <p style={{ margin: 0, color: '#ff5a00', fontWeight: 'bold' }}>3. Ative a opção: "Disable Filtering" (Conteúdo Sensível).</p>
-          <p style={{ margin: 0 }}>4. Reinicie seu App e entre no grupo! 🥰</p>
-        </div>
-      </div>
-
-      <p style={{ marginTop: '30px', fontSize: '10px', color: '#4b5563', fontWeight: 'bold' }}>Suporte: @nathpessoal</p>
+      <p style={{ marginTop: '25px', fontSize: '9px', color: '#4b5563', fontWeight: 'bold' }}>Suporte: @nathpessoal</p>
     </div>
   );
 }
