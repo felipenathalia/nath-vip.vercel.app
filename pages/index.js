@@ -11,6 +11,7 @@ export default function Home() {
     anual: { id: 'anual', title: '1 Ano + WhatsApp', price: 34.90 }
   };
 
+  // RASTREADOR DE PAGAMENTO PERSISTENTE
   useEffect(() => {
     let interval;
     if (pixData?.payment_id) {
@@ -18,12 +19,18 @@ export default function Home() {
         try {
           const res = await fetch(`/api/check_status?id=${pixData.payment_id}`);
           const data = await res.json();
-          if (data.status === 'approved') {
+          
+          console.log("Status do pagamento:", data.status);
+
+          // Se o status for aprovado, pula para a próxima página imediatamente
+          if (data.status === 'approved' || data.status === 'pago') {
             clearInterval(interval);
             window.location.href = '/obrigado'; 
           }
-        } catch (e) { console.error("Erro"); }
-      }, 3000);
+        } catch (e) { 
+          console.error("Erro ao rastrear pagamento"); 
+        }
+      }, 3000); // Tenta a cada 3 segundos
     }
     return () => clearInterval(interval);
   }, [pixData]);
@@ -44,109 +51,11 @@ export default function Home() {
           payment_id: data.id 
         });
       }
-    } catch (e) { alert('Erro no Pix'); }
-    finally { setLoading(false); }
+    } catch (e) { 
+      alert('Erro ao gerar Pix. Verifique sua conexão.'); 
+    } finally { 
+      setLoading(false); 
+    }
   };
 
   return (
-    <div className="bg-[#0b0e11] min-h-screen text-white font-sans pb-20 overflow-x-hidden">
-      <Head>
-        <title>@nath_elloy | OFICIAL FINAL</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-      </Head>
-
-      {/* HEADER FIXO */}
-      <div className="fixed top-0 w-full h-14 bg-[#0b0e11]/95 backdrop-blur-md border-b border-gray-800 z-50 flex items-center px-6">
-        <span className="text-sm font-bold tracking-tight">@nath_elloy</span>
-      </div>
-
-      {/* BANNER */}
-      <div className="relative h-44 w-full bg-cover bg-center mt-14" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
-
-      {/* PERFIL */}
-      <div className="px-5 -mt-10 relative z-10 flex items-end gap-4">
-        <div className="w-24 h-24 rounded-full border-4 border-[#0b0e11] overflow-hidden bg-gray-900 shadow-2xl">
-          <img src="/avatar.png" className="w-full h-full object-cover" />
-        </div>
-        <div className="pb-1">
-           <h1 className="text-2xl font-black flex items-center gap-2 italic uppercase">@nath_elloy ✅</h1>
-           <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">482 Mídias • 15.2k Curtidas</p>
-        </div>
-      </div>
-
-      {/* VÍDEO COM CADEADO */}
-      <div className="px-5 mt-8">
-        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800 shadow-2xl">
-           <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover blur-sm">
-              <source src="/video_preview.mp4" type="video/mp4" />
-           </video>
-           <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center">
-              <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 mb-2">
-                 <span className="text-2xl text-white">🔒</span>
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/70">Vídeo Privado</p>
-           </div>
-        </div>
-      </div>
-
-      {/* GRADE DE 6 IMAGENS ENIGMÁTICAS (FUNDOS DIFERENTES) */}
-      <div className="px-5 mt-6 grid grid-cols-3 gap-3">
-        {[
-          "bg-gradient-to-br from-purple-900/40 to-black",
-          "bg-gradient-to-br from-blue-900/40 to-black",
-          "bg-gradient-to-br from-red-900/40 to-black",
-          "bg-gradient-to-br from-gray-800/40 to-black",
-          "bg-gradient-to-br from-pink-900/40 to-black",
-          "bg-gradient-to-br from-indigo-900/40 to-black"
-        ].map((bg, i) => (
-          <div key={i} className={`aspect-square ${bg} rounded-2xl relative overflow-hidden border border-gray-800 flex items-center justify-center shadow-inner`}>
-             <span className="text-xl opacity-20 filter grayscale">🔒</span>
-             <div className="absolute bottom-2 right-2 w-1.5 h-1.5 bg-white/10 rounded-full"></div>
-          </div>
-        ))}
-      </div>
-
-      {/* TEXTO E BOTÕES */}
-      <div className="px-6 mt-10 text-center">
-        <p className="text-gray-300 text-sm leading-relaxed italic">
-          Desbloqueie agora meu conteúdo sem censura e tenha acesso ao meu <span className="text-[#ff5a00] font-bold">WhatsApp Pessoal</span>.🥰
-        </p>
-      </div>
-
-      <div className="px-5 mt-8 space-y-3">
-        {Object.values(plans).map((p) => (
-          <button 
-            key={p.id} 
-            onClick={() => handleCheckout(p)}
-            className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] active:scale-95 transition-all flex justify-between items-center shadow-xl hover:border-[#ff5a00]/50"
-          >
-            <span className="font-black text-xs uppercase tracking-tighter">{p.title}</span>
-            <span className="text-[#ff5a00] font-black text-lg italic">R$ {p.price.toFixed(2).replace('.', ',')}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* MODAL PIX */}
-      {pixData && (
-        <div className="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center p-6 backdrop-blur-md">
-          <div className="bg-[#161b22] w-full max-w-sm p-8 rounded-[3rem] border border-gray-700 text-center shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-             <div className="bg-white p-4 rounded-3xl inline-block mb-6 shadow-2xl">
-                <img src={`data:image/jpeg;base64,${pixData.qr_code_base64}`} className="w-44 h-44" />
-             </div>
-             <button onClick={() => { navigator.clipboard.writeText(pixData.qr_code); alert('Copiado!'); }} 
-                     className="w-full bg-[#ff5a00] text-white font-black py-6 rounded-[2rem] text-sm mb-4 uppercase shadow-lg shadow-[#ff5a00]/20">
-                COPIAR CÓDIGO PIX
-             </button>
-             <button onClick={() => setPixData(null)} className="text-[10px] text-gray-400 uppercase font-bold underline italic">Voltar</button>
-          </div>
-        </div>
-      )}
-
-      {loading && (
-        <div className="fixed inset-0 bg-black/80 z-[210] flex items-center justify-center font-black text-[#ff5a00] animate-pulse">
-          CARREGANDO PIX...
-        </div>
-      )}
-    </div>
-  );
-}
