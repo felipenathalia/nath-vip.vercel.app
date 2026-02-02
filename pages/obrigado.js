@@ -5,12 +5,16 @@ export default function Obrigado() {
   const [autorizado, setAutorizado] = useState(false);
 
   useEffect(() => {
-    // Trava de segurança para não acessarem direto
+    // Trava de segurança: só permite acesso se vier do seu domínio
     const veioDoSite = document.referrer.includes('nath-vip-vercel-app.vercel.app');
+    
     if (veioDoSite) {
       setAutorizado(true);
     } else {
-      setTimeout(() => { window.location.href = '/'; }, 2000);
+      // Se tentar acessar direto, redireciona para a home após 2 segundos
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 2000);
     }
   }, []);
 
@@ -23,49 +27,56 @@ export default function Obrigado() {
   }
 
   return (
-    <div className="bg-[#0b0e11] min-h-screen text-white font-sans flex flex-col items-center justify-center p-6 overflow-hidden relative">
+    <div className="bg-[#0b0e11] min-h-screen text-white font-sans flex flex-col items-center justify-center px-6 py-12 text-center">
       <Head>
-        <title>Acesso Liberado! ✅</title>
+        <title>Acesso Liberado! 🔥</title>
         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
+      
+      {/* Ícone de Sucesso conforme o print */}
+      <div className="w-20 h-20 bg-[#22c55e] rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(34,197,94,0.5)]">
+        <div className="w-10 h-10 border-b-4 border-r-4 border-white rotate-45 mb-2 mr-1"></div>
+      </div>
+      
+      <h1 className="text-3xl font-black mb-2 uppercase italic text-[#ff5a00] tracking-tighter">
+        Pagamento Confirmado!
+      </h1>
+      
+      <p className="text-gray-300 mb-10 italic">
+        Seu lugar no meu VIP está garantido. <br/> 
+        Toque no botão abaixo para entrar agora! 👇
+      </p>
+      
+      {/* Botão Azul do Telegram conforme o print */}
+      <a 
+        href="https://t.me/+R7NykZfhGwJhNWQx" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="w-full max-w-sm bg-[#24A1DE] py-6 rounded-[2.5rem] font-black text-lg shadow-[0_15px_40px_rgba(36,161,222,0.3)] hover:scale-105 transition-transform flex items-center justify-center mb-12 uppercase"
+      >
+        ENTRAR NO MEU TELEGRAM VIP
+      </a>
 
-      {/* Brilhos de fundo para dar profundidade */}
-      <div className="absolute top-[-10%] left-[-10%] w-72 h-72 bg-[#ff5a00]/10 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-blue-500/10 rounded-full blur-[120px]"></div>
-
-      <div className="relative z-10 w-full max-w-md bg-white/[0.03] backdrop-blur-xl border border-white/10 p-10 rounded-[3rem] text-center shadow-2xl">
-        <div className="w-24 h-24 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_40px_rgba(34,197,94,0.4)] animate-pulse">
-          <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
-          </svg>
-        </div>
-
-        <h1 className="text-4xl font-black uppercase italic tracking-tighter mb-4 bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
-          Pagamento<br/>Confirmado!
-        </h1>
-
-        <p className="text-gray-400 text-sm mb-12 font-medium leading-relaxed">
-          Seu lugar no meu VIP está garantido.<br/>
-          Toque no botão abaixo para liberar o conteúdo. 👇
+      {/* Seção de Suporte conforme o print */}
+      <div className="w-full max-w-md bg-[#161b22] border border-white/5 p-8 rounded-[2.5rem] text-sm text-gray-400 shadow-2xl">
+        <h2 className="text-white font-bold mb-3 uppercase text-xs tracking-widest">Ainda não tem o Telegram?</h2>
+        <p className="mb-6 leading-relaxed">
+          Basta baixar o app na sua loja de aplicativos (App Store ou Play Store), criar sua conta e clicar no botão azul acima novamente.
         </p>
 
-        <a href="https://t.me/+R7NykZfhGwJhNWQx" 
-           className="group relative inline-flex items-center justify-center w-full">
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#24A1DE] to-[#0088cc] rounded-[2rem] blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-          <button className="relative w-full bg-[#24A1DE] text-white font-black py-6 rounded-[2rem] text-lg uppercase tracking-widest shadow-2xl transition-all active:scale-95">
-            ENTRAR NO TELEGRAM VIP
-          </button>
-        </a>
+        <div className="h-[1px] bg-white/5 w-full mb-6"></div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 space-y-4">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[10px] text-gray-500 uppercase font-black tracking-[0.2em]">Suporte Exclusivo</span>
-            <p className="text-xs text-gray-300">Instagram: <span className="text-[#ff5a00] font-bold">@nath_elloy</span></p>
-          </div>
-        </div>
+        <h2 className="text-white font-bold mb-3 uppercase text-xs tracking-widest">Precisa de Suporte?</h2>
+        <p className="leading-relaxed">
+          Me chame na <span className="text-[#ff5a00] font-bold">DM do Instagram</span> ou no Telegram pelo usuário <span className="text-white font-bold">@nathpessoal</span>. 
+          <br/><br/>
+          Você será respondido em até 24 horas! 🥰
+        </p>
       </div>
 
-      <p className="mt-10 text-[9px] text-gray-600 uppercase tracking-[0.4em] font-bold">© @nath_elloy • Original Content</p>
+      <p className="mt-12 text-[10px] text-gray-600 uppercase tracking-[0.2em] font-bold">
+        @NATH_ELLOY • TODOS OS DIREITOS RESERVADOS
+      </p>
     </div>
   );
 }
