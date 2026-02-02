@@ -43,4 +43,5 @@ export default async function handler(req, res) {
     console.error('Erro de conexão:', error);
     res.status(500).json({ error: 'Erro interno no servidor' });
   }
-}
+} 
+
