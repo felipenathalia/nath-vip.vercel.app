@@ -114,4 +114,6 @@ export default function Home() {
         {Object.values(plans).map((p) => (
           <button key={p.id} onClick={() => handleCheckout(p)} className="w-full p-5 rounded-[2rem] border border-white/5 bg-[#0d1117] flex justify-between items-center shadow-xl">
             <span className="font-black text-xs uppercase text-white">{p.title}</span>
-            <span className="text-[#ff5a00] font-black text-lg
+            <span className="text-[#ff5a00] font-black text-lg 
+            // Versão Final - Teste de Pagamento
+            
