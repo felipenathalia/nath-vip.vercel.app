@@ -6,7 +6,7 @@ export default function Home() {
   const [pixData, setPixData] = useState(null);
 
   const plans = {
-    mensal: { id: 'mensal', title: '1 Mês', price: 1.90 },
+    mensal: { id: 'mensal', title: '1 Mês', price: 1.00 },
     semestral: { id: 'semestral', title: '6 Meses', price: 24.90 },
     anual: { id: 'anual', title: '1 Ano + WhatsApp', price: 34.90 }
   };
