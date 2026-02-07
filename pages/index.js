@@ -65,6 +65,7 @@ export default function Home() {
         <span className="text-sm font-bold tracking-tight">@nath_elloy</span>
       </div>
 
+      {/* BANNER RESTAURADO */}
       <div className="relative h-44 w-full bg-cover bg-center mt-14 shadow-inner" style={{ backgroundImage: "url('/banner.jpg')" }}></div>
 
       <div className="px-5 -mt-10 relative z-10 flex items-end gap-4">
@@ -75,6 +76,31 @@ export default function Home() {
            <h1 className="text-2xl font-black italic uppercase">@nath_elloy ✅</h1>
            <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">482 Mídias • 15.2k Curtidas</p>
         </div>
+      </div>
+
+      {/* VIDEO PREVIEW RESTAURADO */}
+      <div className="px-5 mt-8">
+        <div className="relative w-full aspect-video bg-[#161b22] rounded-[2rem] overflow-hidden border border-gray-800 shadow-2xl">
+           <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover blur-sm opacity-50">
+              <source src="/video_preview.mp4" type="video/mp4" />
+           </video>
+           <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+              <span className="text-2xl mb-2">🔒</span>
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/70">Acesso Restrito</p>
+           </div>
+        </div>
+      </div>
+
+      {/* FOTOS DE PREVIA COLORIDAS RESTAURADAS */}
+      <div className="px-5 mt-6 grid grid-cols-3 gap-3">
+        {[
+          "from-purple-900/40", "from-blue-900/40", "from-red-900/40",
+          "from-emerald-900/40", "from-pink-900/40", "from-indigo-900/40"
+        ].map((gradient, i) => (
+          <div key={i} className={`aspect-square bg-gradient-to-br ${gradient} to-gray-900 rounded-2xl border border-gray-800 flex items-center justify-center shadow-inner`}>
+             <span className="text-xl opacity-20">🔒</span>
+          </div>
+        ))}
       </div>
 
       <div className="px-6 mt-10 text-center">
@@ -130,4 +156,4 @@ export default function Home() {
       )}
     </div>
   );
-}  
+}
