@@ -48,7 +48,7 @@ export default function Links() {
           </a>
 
           {/* BOTÃO AZUL */}
-          <a href="https://t.me/nathseloy_bot" className="flex items-center justify-center w-full bg-[#0088cc] p-5 rounded-2xl shadow-xl active:scale-95 transition-transform">
+          <a href="https://t.me/NathaliaElloy_bot" className="flex items-center justify-center w-full bg-[#0088cc] p-5 rounded-2xl shadow-xl active:scale-95 transition-transform">
             <span className="text-white font-black text-xl tracking-tighter">тεłεgяคм</span>
           </a>
 
